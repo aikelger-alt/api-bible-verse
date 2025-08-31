@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Random Bible Verse</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      height: 100vh;
+      background: linear-gradient(135deg, #e0f7fa, #f3e5f5); /* soft blue-purple gradient */
+      color: #333;
+    }
+
+    /* Header */
+    header {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(10px);
+      color: #2c3e50;
+      padding: 20px 0;
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    /* Main content */
+    .main {
+      display: flex;
+      height: calc(100vh - 70px);
+    }
+
+    /* Left Side (Button) */
+    .left {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(255,255,255,0.3);
+      backdrop-filter: blur(12px);
+    }
+
+    button {
+      background: #81d4fa; /* soft sky blue */
+      color: white;
+      border: none;
+      padding: 18px 36px;
+      font-size: 18px;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      background: #4fc3f7; /* slightly brighter on hover */
+    }
+
+    /* Right Side (Verse) */
+    .right {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: rgba(255,255,255,0.6);
+      padding: 30px;
+      border-radius: 25px;
+      max-width: 450px;
+      text-align: center;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+    }
+
+    .container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+      font-size: 26px;
+      margin-bottom: 15px;
+      color: #2c3e50;
+    }
+
+    p {
+      font-style: italic;
+      color: #34495e;
+      font-size: 18px;
+      line-height: 1.5;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .main {
+        flex-direction: column;
+      }
+      .left, .right {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    Bible Verse Generator
+  </header>
+
+  <!-- Main content -->
+  <div class="main">
+    <!-- Left Side (Button) -->
+    <div class="left">
+      <button onclick="fetchVerse()">Get Verse</button>
+    </div>
+
+    <!-- Right Side (Verse Display) -->
+    <div class="right">
+      <div class="container">
+        <h2>Random Bible Verse</h2>
+        <p id="verse-text">Click the button to get a verse!</p>
+      </div>
+    </div>
+  </div>
+
+<script>
+  async function fetchVerse() {
+    const verseText = document.getElementById('verse-text');
+    verseText.style.opacity = 0;
+
+    try {
+      const response = await fetch('http://127.0.0.1:5000/random-verse');
+      const data = await response.json();
+
+      setTimeout(() => {
+        verseText.innerHTML = `<strong>${data.verse}</strong><br>${data.text}`;
+        verseText.style.opacity = 1;
+      }, 300);
+    } catch (error) {
+      setTimeout(() => {
+        verseText.innerHTML = "Error fetching verse.";
+        verseText.style.opacity = 1;
+      }, 300);
+    }
+  }
+</script>
+
+</body>
+</html>
