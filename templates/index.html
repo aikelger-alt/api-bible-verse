@@ -9,153 +9,150 @@
 
     body {
       font-family: 'Montserrat', sans-serif;
-      height: 100vh;
-      background: linear-gradient(135deg, #e0f7fa, #f3e5f5); /* soft blue-purple gradient */
-      color: #333;
-    }
-
-    /* Header */
-    header {
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(10px);
-      color: #2c3e50;
-      padding: 20px 0;
-      text-align: center;
-      font-size: 28px;
-      font-weight: 700;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    /* Main content */
-    .main {
-      display: flex;
-      height: calc(100vh - 70px);
-    }
-
-    /* Left Side (Button) */
-    .left {
-      width: 50%;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
       display: flex;
       justify-content: center;
       align-items: center;
-      background: rgba(255,255,255,0.3);
-      backdrop-filter: blur(12px);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Animated floating circles */
+    body::before, body::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      animation: float 15s infinite ease-in-out;
+    }
+
+    body::before {
+      width: 300px; height: 300px;
+      top: -100px; left: -100px;
+    }
+
+    body::after {
+      width: 200px; height: 200px;
+      bottom: -80px; right: -50px;
+      animation-duration: 20s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+      50% { transform: translateY(50px) translateX(30px) rotate(180deg); }
+    }
+
+    /* Container for content */
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #fff;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+
+    /* Glassmorphic card */
+    .card {
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(15px);
+      border-radius: 25px;
+      padding: 40px 30px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+    }
+
+    .card h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: black;
+    }
+
+    .card p {
+      font-size: 1.2rem;
+      font-style: italic;
+      color: black;
+      line-height: 1.6;
+      opacity: 0;
+      transition: opacity 0.6s ease;
     }
 
     button {
-      background: #81d4fa; /* soft sky blue */
-      color: white;
+      padding: 16px 40px;
+      font-size: 1.2rem;
       border: none;
-      padding: 18px 36px;
-      font-size: 18px;
       border-radius: 50px;
+      background: #ff7eb9;
+      color: #fff;
       cursor: pointer;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
       transition: all 0.3s ease;
-      font-weight: 600;
+      font-weight: 700;
     }
 
     button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-      background: #4fc3f7; /* slightly brighter on hover */
-    }
-
-    /* Right Side (Verse) */
-    .right {
-      width: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .container {
-      background: rgba(255,255,255,0.6);
-      padding: 30px;
-      border-radius: 25px;
-      max-width: 450px;
-      text-align: center;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-      transition: all 0.3s ease;
-    }
-
-    .container:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 25px rgba(0,0,0,0.2);
-    }
-
-    h2 {
-      font-size: 26px;
-      margin-bottom: 15px;
-      color: #2c3e50;
-    }
-
-    p {
-      font-style: italic;
-      color: #34495e;
-      font-size: 18px;
-      line-height: 1.5;
-      opacity: 1;
-      transition: opacity 0.5s ease;
+      transform: scale(1.1);
+      background: #ff65a3;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.35);
     }
 
     /* Responsive */
-    @media (max-width: 768px) {
-      .main {
-        flex-direction: column;
-      }
-      .left, .right {
-        width: 100%;
-      }
+    @media (max-width: 600px) {
+      h1 { font-size: 2rem; }
+      .card h2 { font-size: 1.5rem; }
+      .card p { font-size: 1rem; }
+      button { font-size: 1rem; padding: 12px 30px; }
     }
+
   </style>
 </head>
 <body>
 
-  <!-- Header -->
-  <header>
-    Bible Verse Generator
-  </header>
-
-  <!-- Main content -->
-  <div class="main">
-    <!-- Left Side (Button) -->
-    <div class="left">
-      <button onclick="fetchVerse()">Get Verse</button>
+  <div class="wrapper">
+    <h1>Bible Verse Generator</h1>
+    <div class="card">
+      <h2>Random Bible Verse</h2>
+      <p id="verse-text">Click the button to get a verse!</p>
     </div>
-
-    <!-- Right Side (Verse Display) -->
-    <div class="right">
-      <div class="container">
-        <h2>Random Bible Verse</h2>
-        <p id="verse-text">Click the button to get a verse!</p>
-      </div>
-    </div>
+    <button onclick="fetchVerse()">Get Verse</button>
   </div>
 
-<script>
-  async function fetchVerse() {
-    const verseText = document.getElementById('verse-text');
-    verseText.style.opacity = 0;
+  <script>
+    async function fetchVerse() {
+      const verseText = document.getElementById('verse-text');
+      verseText.style.opacity = 0;
 
-    try {
-      const response = await fetch('http://127.0.0.1:5000/random-verse');
-      const data = await response.json();
+      try {
+        const response = await fetch('/random-verse'); // use relative path for Flask
+        const data = await response.json();
 
-      setTimeout(() => {
-        verseText.innerHTML = `<strong>${data.verse}</strong><br>${data.text}`;
-        verseText.style.opacity = 1;
-      }, 300);
-    } catch (error) {
-      setTimeout(() => {
-        verseText.innerHTML = "Error fetching verse.";
-        verseText.style.opacity = 1;
-      }, 300);
+        setTimeout(() => {
+          verseText.innerHTML = `<strong>${data.verse}</strong><br>${data.text}`;
+          verseText.style.opacity = 1;
+        }, 300);
+      } catch (error) { 
+        setTimeout(() => {
+          verseText.innerHTML = "Error fetching verse.";
+          verseText.style.opacity = 1;
+        }, 300);
+      }
     }
-  }
-</script>
+  </script>
 
 </body>
 </html>

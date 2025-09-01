@@ -19,6 +19,3 @@ def home():
 @app.route('/random-verse', methods=['GET'])
 def get_random_verse():
     return jsonify(random.choice(verses))
-
-if __name__ == '__main__':
-    app.run(debug=True)
