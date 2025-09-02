@@ -16,6 +16,14 @@ verses = [
 def home():
     return render_template('landingpage.html')
 
+@app.route('/index.html')
+def index():
+    return render_template('index.html')
+
+# <-- This is the function you're asking about:
 @app.route('/random-verse', methods=['GET'])
 def get_random_verse():
     return jsonify(random.choice(verses))
+
+if __name__ == '__main__':
+    app.run(debug=True)
