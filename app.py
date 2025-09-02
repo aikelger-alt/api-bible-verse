@@ -14,7 +14,7 @@ verses = [
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('landingpage.html')
 
 @app.route('/random-verse', methods=['GET'])
 def get_random_verse():
