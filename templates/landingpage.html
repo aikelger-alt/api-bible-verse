@@ -3,9 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>InternTrack – Monitor Student Internships Easily</title>
+  <title>Bible Verse Generator</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
 
     body {
       background: linear-gradient(to right, #1e3c72, #2a5298);
@@ -20,7 +25,6 @@
 
     header h1 {
       font-size: 3rem;
-      font-weight: bold;
       margin-bottom: 10px;
     }
 
@@ -69,11 +73,12 @@
       margin-bottom: 30px;
     }
 
+    /* Flexbox: all cards in one line, shorter width */
     .features {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
       gap: 15px;
-      justify-items: center;
     }
 
     .feature-card {
@@ -81,19 +86,14 @@
       padding: 15px;
       border-radius: 10px;
       text-align: center;
-      width: 180px;
+      width: 140px;     /* Narrower width to fit all six */
+      flex: 0 0 auto;   /* Prevent growing or shrinking */
+      min-width: 0;     /* Allow proper shrinking within flex */
       transition: transform 0.3s ease;
     }
 
     .feature-card:hover {
       transform: translateY(-5px);
-    }
-
-    .feature-card img {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-      margin-top: 10px;
     }
 
     footer {
@@ -113,32 +113,20 @@
     <h1>Bible Verse Generator</h1>
     <p>"Go ye into all the world, and preach the gospel to every creature"</p>
     <div class="cta">
-    <a href="{{ url_for('index') }}">Get Started</a>
-
+      <a href="index.html">Get Started</a>
     </div>
   </header>
 
   <section>
     <h2>About Us</h2>
-    <p>A simple Flask-based API that returns a random Bible verse in JSON format.
-    Includes a basic HTML/CSS UI for displaying the verse.</p>
-
+    <p>A simple Flask-based API that returns a random Bible verse in JSON format with a basic HTML/CSS interface.</p>
     <div class="features">
-      <div class="feature-card">
-        <h3>Bea Cupin</h3>
-      </div>
-      <div class="feature-card">
-        <h3>HannahDelaCruz</h3>
-      </div>
-      <div class="feature-card">
-        <h3>An-AnSotcheza</h3>
-      </div>
-      <div class="feature-card">
-        <h3>Aikel Sumarago</h3>
-      </div>
-      <div class="feature-card">
-        <h3>Reyna Ranises</h3>
-      </div>
+      <div class="feature-card"><h3>Bea Cupin</h3></div>
+      <div class="feature-card"><h3>Hannah Dela Cruz</h3></div>
+      <div class="feature-card"><h3>An-An Sotcheza</h3></div>
+      <div class="feature-card"><h3>Aikel Sumarago</h3></div>
+      <div class="feature-card"><h3>Reyna Ranises</h3></div>
+      <div class="feature-card"><h3>Jherwin Maglasang</h3></div>
     </div>
   </section>
 
@@ -147,6 +135,3 @@
   </footer>
 </body>
 </html>
-
-
-
