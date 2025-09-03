@@ -5,6 +5,8 @@ import random
 app = Flask(__name__)
 CORS(app)
 
+# PULLED THIS SHIT
+
 verses = [
     {"verse": "John 3:16", "text": "For God so loved the world that he gave his one and only Son."},
     {"verse": "Psalm 23:1", "text": "The Lord is my shepherd; I shall not want."},
